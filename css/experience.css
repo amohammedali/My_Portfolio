@@ -1,0 +1,290 @@
+/* ═══════════════════════════════════════════════════
+   ZIGZAG TIMELINE  —  single source of truth
+   ═══════════════════════════════════════════════════ */
+
+/* Wrapper */
+.timeline-center {
+    position: relative;
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px 0 60px;
+    overflow: visible;
+}
+
+/* ── Vertical center line ── */
+.timeline-center::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 3px;
+    background: linear-gradient(to bottom,
+            transparent 0%,
+            var(--electric-blue) 8%,
+            var(--neon-violet) 50%,
+            var(--electric-blue) 92%,
+            transparent 100%);
+    /*
+     * THREE PARALLEL LINES via box-shadow:
+     * - Center line  : the element itself at 50%
+     * - Left track   : box-shadow offset -12px  (electric blue) — tight rail
+     * - Right track  : box-shadow offset +12px  (neon violet)  — tight rail
+     */
+    box-shadow:
+        -12px 0 0 0 rgba(0, 243, 255, 0.5),
+        12px 0 0 0 rgba(138, 43, 226, 0.5),
+        0 0 10px var(--electric-blue),
+        0 0 24px rgba(138, 43, 226, 0.6);
+    animation: tlPulse 2.5s ease-in-out infinite alternate;
+    z-index: 0;
+}
+
+@keyframes tlPulse {
+    0% {
+        box-shadow:
+            -12px 0 0 0 rgba(0, 243, 255, 0.25),
+            12px 0 0 0 rgba(138, 43, 226, 0.25),
+            0 0 6px var(--electric-blue),
+            0 0 14px rgba(138, 43, 226, 0.4);
+        opacity: 0.8;
+    }
+
+    100% {
+        box-shadow:
+            -12px 0 0 0 rgba(0, 243, 255, 0.75),
+            12px 0 0 0 rgba(138, 43, 226, 0.75),
+            0 0 18px var(--electric-blue),
+            0 0 36px rgba(138, 43, 226, 0.8);
+        opacity: 1;
+    }
+}
+
+/* Clearfix so the container wraps floated children */
+.timeline-center::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+/* ── Each card ── */
+.timeline-item {
+    position: relative;
+    width: calc(50% - 110px);
+    /* 50% minus gap to center line — wider breathing room */
+    margin-bottom: 50px;
+    padding: 26px 24px;
+    z-index: 1;
+    overflow: visible !important;
+    box-sizing: border-box;
+}
+
+/* LEFT cards float left */
+.timeline-item.left {
+    float: left;
+    clear: left;
+    text-align: left;
+}
+
+/* RIGHT cards float right — staggered DOWN so cards zigzag vertically */
+.timeline-item.right {
+    float: right;
+    clear: right;
+    text-align: left;
+    margin-top: 130px;
+    /* ← stagger: right card drops below left card */
+}
+
+/* ── Horizontal connector line ── */
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    top: 34px;
+    /* vertically centred on the dot */
+    height: 2px;
+    width: 110px;
+    /* spans the wider gap to the center line */
+    background: linear-gradient(to right, var(--electric-blue), var(--neon-violet));
+    opacity: 0.7;
+    z-index: 1;
+    transition: opacity 0.3s, box-shadow 0.3s;
+}
+
+/* connector for LEFT card goes RIGHT toward center line */
+.timeline-item.left::after {
+    right: -110px;
+}
+
+/* connector for RIGHT card goes LEFT toward center line */
+.timeline-item.right::after {
+    left: -110px;
+    background: linear-gradient(to left, var(--electric-blue), var(--neon-violet));
+}
+
+.timeline-item:hover::after {
+    opacity: 1;
+    box-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green);
+}
+
+/* ── Dot that sits exactly on the center line ── */
+/*
+   Card width = calc(50% - 110px)
+   → right edge of left card is at [calc(50% - 110px)] from container left
+   → distance to 50% center = 110px
+   Dot is 20px wide → half = 10px
+   → right: -(110px + 10px) = -120px places dot CENTER at 50%   ✓
+   Same logic for right cards with left: -120px
+*/
+.tl-dot {
+    position: absolute;
+    top: 24px;
+    /* (34px connector top) - (10px half dot) = 24px */
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--bg-void);
+    border: 3px solid var(--electric-blue);
+    box-shadow: 0 0 12px var(--electric-blue);
+    z-index: 3;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-item.left .tl-dot {
+    right: -120px;
+}
+
+.timeline-item.right .tl-dot {
+    left: -120px;
+}
+
+.timeline-item:hover .tl-dot {
+    transform: scale(1.4);
+    box-shadow: 0 0 20px currentColor, 0 0 40px currentColor;
+}
+
+/* ════════════════════════════════════════════
+   TIMELINE FLIP CARD  —  inner mechanism
+   The outer .timeline-item handles layout/float.
+   The flip lives entirely inside .tl-flip-wrapper.
+   ════════════════════════════════════════════ */
+
+/* Perspective host — fills the timeline-item */
+.tl-flip-wrapper {
+    perspective: 1200px;
+    width: 100%;
+}
+
+/* Rotating container */
+.tl-card-inner {
+    position: relative;
+    width: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.75s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+/* Flipped state (toggled via JS onclick) */
+.tl-card-inner.is-flipped {
+    transform: rotateY(180deg);
+}
+
+/* Shared face styles */
+.tl-front,
+.tl-back {
+    width: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 16px;
+    padding: 26px 24px;
+    box-sizing: border-box;
+}
+
+/* Front face — visible by default */
+/* inherits glass-plate styles */
+
+/* Back face — rotated 180° so it starts hidden */
+.tl-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: rotateY(180deg);
+    background: rgba(8, 3, 20, 0.92);
+    border: 2px solid var(--glass-border);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* Image box on back face */
+.tl-back-img {
+    width: 100%;
+    height: 150px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid var(--electric-blue);
+    flex-shrink: 0;
+}
+
+.tl-back-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.85;
+    transition: opacity 0.3s;
+}
+
+.tl-back-img img:hover {
+    opacity: 1;
+}
+
+/* Subtle flip-hint label */
+.tl-flip-hint {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    opacity: 0.55;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: auto;
+    transition: opacity 0.3s;
+}
+
+.tl-front:hover .tl-flip-hint,
+.tl-back:hover .tl-flip-hint {
+    opacity: 1;
+    color: var(--neon-green);
+}
+
+/* Give each timeline-item a min-height so the absolute back face doesn't collapse it */
+.timeline-item {
+    min-height: 200px;
+}
+
+.chronology-data-block {
+    margin-bottom: 40px;
+}
+
+.block-timestamp {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--neon-green);
+    font-weight: 800;
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+}
+
+.chronology-data-block h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 6px;
+}
+
+.chronology-data-block h4 {
+    color: var(--electric-blue);
+    font-weight: 500;
+    margin-bottom: 16px;
+}
+

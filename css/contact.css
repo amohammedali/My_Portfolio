@@ -1,0 +1,182 @@
+.handshake-grid-io {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 40px;
+}
+
+.endpoint-comms-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.comms-io-link {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    padding: 22px;
+    transition: all 0.3s;
+}
+
+.comms-io-link:hover {
+    color: #fff;
+    border-color: var(--electric-blue);
+    background: rgba(0, 243, 255, 0.05);
+    transform: translateX(6px);
+}
+
+.comms-io-link i {
+    font-size: 1.5rem;
+    color: var(--electric-blue);
+    width: 25px;
+    text-align: center;
+}
+
+
+/* ==========================================
+   CONTACT SECTION UPDATES
+   ========================================== */
+
+/* Neon Inputs */
+.input-matrix-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.neon-input {
+    width: 100%;
+    background: rgba(4, 2, 10, 0.6);
+    border: 2px solid var(--dark-border);
+    border-radius: 8px;
+    padding: 16px;
+    color: var(--text-primary);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.neon-input:focus {
+    border-color: var(--electric-blue);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+    background: rgba(4, 2, 10, 0.9);
+}
+
+.textarea-wrapper {
+    position: relative;
+}
+
+.char-counter {
+    position: absolute;
+    bottom: -22px;
+    right: 5px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-family: 'Orbitron', sans-serif;
+}
+
+/* Copy to Clipboard Button */
+.comms-io-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.comms-io-link.hover-neon-slide {
+    flex-grow: 1;
+    transition: all 0.4s ease;
+}
+
+.comms-io-link.hover-neon-slide:hover {
+    transform: translateX(10px);
+    border-color: var(--neon-green);
+    box-shadow: 0 0 20px rgba(57, 255, 20, 0.2);
+}
+
+.copy-btn {
+    background: rgba(4, 2, 10, 0.8);
+    border: 1px solid var(--dark-border);
+    color: var(--text-secondary);
+    width: 45px;
+    height: 45px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.copy-btn:hover {
+    color: var(--neon-green);
+    border-color: var(--neon-green);
+    background: rgba(57, 255, 20, 0.1);
+}
+
+.copy-tooltip {
+    position: absolute;
+    top: -35px;
+    background: var(--neon-green);
+    color: #000;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.7rem;
+    font-weight: bold;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.copy-tooltip.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Button Success State */
+.btn-icon {
+    transition: all 0.3s ease;
+}
+
+#send-btn.success-state {
+    background: var(--neon-green);
+    color: #000;
+    border-color: var(--neon-green);
+    box-shadow: 0 0 25px rgba(57, 255, 20, 0.5);
+    pointer-events: none;
+}
+
+#send-btn.error-state {
+    background: rgba(255, 50, 50, 0.1);
+    color: #ff3232;
+    border-color: #ff3232;
+    box-shadow: 0 0 25px rgba(255, 50, 50, 0.5);
+    pointer-events: none;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
+}
+
+.shake-error {
+    border-color: rgba(255, 50, 50, 0.8) !important;
+    box-shadow: 0 0 8px rgba(255, 50, 50, 0.8) !important;
+    animation: shake 0.4s ease-in-out;
+}
+
+.toast.error-toast {
+    border-color: #ff3232;
+    color: #ff3232;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 50, 50, 0.2);
+}
+
