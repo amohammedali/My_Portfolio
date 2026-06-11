@@ -172,3 +172,37 @@ section {
     }
 }
 
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    section {
+        padding: 100px 0 60px 0;
+    }
+
+    .crypto-section-header {
+        font-size: 1.8rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .crypto-section-header::after {
+        width: 100%;
+        flex-grow: 0;
+        height: 2px;
+    }
+
+    .interactive-action-cluster {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .cyber-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .ui-viewport-wrapper {
+        padding: 0 20px;
+    }
+}
+

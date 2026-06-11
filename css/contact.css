@@ -180,3 +180,24 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 50, 50, 0.2);
 }
 
+/* Mobile Responsiveness for Contact Section */
+@media (max-width: 768px) {
+    .handshake-grid-io {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .form-group.split-row {
+        flex-direction: column;
+    }
+
+    .toast {
+        left: 50%;
+        bottom: 20px;
+        transform: translateX(-50%) translateY(150px);
+    }
+
+    .toast.show {
+        transform: translateX(-50%) translateY(0);
+    }
+}

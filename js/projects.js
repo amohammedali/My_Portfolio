@@ -230,18 +230,18 @@ if (educmsVideo) {
 
 // EduCMS 3D Flip Logic
 const educmsImages = [
-    '/assets/EduCMS-College_System/container/admin_dashboard.png',
-    '/assets/EduCMS-College_System/container/admin_departments.png',
-    '/assets/EduCMS-College_System/container/Admin_login.png',
-    '/assets/EduCMS-College_System/container/admin_subjects.png',
-    '/assets/EduCMS-College_System/container/faculty_login.png',
-    '/assets/EduCMS-College_System/container/hod_login.png',
-    '/assets/EduCMS-College_System/container/placement_Status.png',
-    '/assets/EduCMS-College_System/container/staff_register.png',
-    '/assets/EduCMS-College_System/container/Student_dashboard.png',
-    '/assets/EduCMS-College_System/container/student_digital_id.png',
-    '/assets/EduCMS-College_System/container/student_leaderboard.png',
-    '/assets/EduCMS-College_System/container/student_login.png'
+    'assets/EduCMS-College_System/container/admin_dashboard.png',
+    'assets/EduCMS-College_System/container/admin_departments.png',
+    'assets/EduCMS-College_System/container/Admin_login.png',
+    'assets/EduCMS-College_System/container/admin_subjects.png',
+    'assets/EduCMS-College_System/container/faculty_login.png',
+    'assets/EduCMS-College_System/container/hod_login.png',
+    'assets/EduCMS-College_System/container/placement_Status.png',
+    'assets/EduCMS-College_System/container/staff_register.png',
+    'assets/EduCMS-College_System/container/Student_dashboard.png',
+    'assets/EduCMS-College_System/container/student_digital_id.png',
+    'assets/EduCMS-College_System/container/student_leaderboard.png',
+    'assets/EduCMS-College_System/container/student_login.png'
 ];
 
 document.querySelectorAll('.educms-flip-container').forEach(container => {
@@ -894,13 +894,13 @@ if (auraemsLightbox) {
 
 // WanderVista 3D Flip Logic
 const wandervistaImages = [
-    '/assets/Tourism_system/container/book_a_tour.png',
-    '/assets/Tourism_system/container/booking.png',
-    '/assets/Tourism_system/container/credit.png',
-    '/assets/Tourism_system/container/dashboard.png',
-    '/assets/Tourism_system/container/destination.png',
-    '/assets/Tourism_system/container/payment.png',
-    '/assets/Tourism_system/container/register_page.png'
+    'assets/Tourism_system/container/book_a_tour.png',
+    'assets/Tourism_system/container/booking.png',
+    'assets/Tourism_system/container/credit.png',
+    'assets/Tourism_system/container/dashboard.png',
+    'assets/Tourism_system/container/destination.png',
+    'assets/Tourism_system/container/payment.png',
+    'assets/Tourism_system/container/register_page.png'
 ];
 
 document.querySelectorAll('.wandervista-flip-container').forEach(container => {

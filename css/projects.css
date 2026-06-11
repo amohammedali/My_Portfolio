@@ -1446,3 +1446,71 @@
     font-size: 1rem;
     opacity: 0.8;
 }
+
+/* Mobile Responsiveness for Projects */
+@media (max-width: 768px) {
+    .architectures-grid-matrix {
+        grid-template-columns: 1fr;
+    }
+    
+    .glass-plate {
+        padding: 20px;
+    }
+
+    .system-preview-frame {
+        flex-direction: column;
+        height: auto;
+    }
+    
+    .video-preview-frame {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .video-preview-frame img, .image-box img {
+        height: 200px;
+    }
+    
+    .image-box {
+        margin-bottom: 10px;
+    }
+
+    /* Adjust Lightbox for mobile */
+    .educms-lightbox-content,
+    .wandervista-lightbox-content,
+    .medimind-lightbox-content {
+        width: 95%;
+        height: auto;
+    }
+    
+    #educms-lightbox-img,
+    #wandervista-lightbox-img,
+    #medimind-lightbox-img {
+        width: 100%;
+        height: auto;
+    }
+
+    /* Bring navigation buttons inside the screen */
+    .educms-lightbox-nav-btn.prev-btn,
+    .wandervista-lightbox-nav-btn.prev-btn,
+    .medimind-lightbox-nav-btn.prev-btn {
+        left: 5px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+    }
+    
+    .educms-lightbox-nav-btn.next-btn,
+    .wandervista-lightbox-nav-btn.next-btn,
+    .medimind-lightbox-nav-btn.next-btn {
+        right: 5px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+    }
+    
+    .close-btn {
+        top: -45px;
+        right: 0;
+    }
+}
